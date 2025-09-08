@@ -2,7 +2,9 @@
 "update_url": "https://clients2.google.com/service/update2/crx",
 
   "manifest_version": 3,
-  "name": "__MSG_name__",  "description": "__MSG_description__",
+  "name": "__MSG_name__",
+  "homepage_url": "https://wawebsender.com/",
+  "description": "__MSG_description__",
   "default_locale": "en",
   "permissions": [
     "activeTab",
