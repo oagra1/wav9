@@ -209,10 +209,7 @@
         metadata: metadata
       }
       let httpRequest = new XMLHttpRequest() //第一步：创建需要的对象
-      // httpRequest.open('POST', 'https://lab.zingfront.com/api/pay/make-order', true) //第二步：打开连接
-      const PAY_URL = 'https://sender.watechdev.asia'
-      // const PAY_URL = 'https://lab.zingfront.com'
-      httpRequest.open('POST', PAY_URL + '/api/pay/make-order', true) //第二步：打开连接
+                  httpRequest.open('POST', PAY_URL + '/api/pay/make-order', true) //第二步：打开连接
       httpRequest.setRequestHeader('Content-type', 'application/json') //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）"accept, accept-encoding, authorization, content-type, dnt, origin, user-agent, x-csrftoken, x-requested-with, language, whatsapp-id, version")
       httpRequest.send(JSON.stringify(requestObj)) //发送请求 将情头体写在send中
       /**
