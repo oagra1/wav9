@@ -40,7 +40,7 @@
                             <li style="text-align: left;align-items: center;display: flex;padding: 3px 35px"><svg style="margin-right:35px;height: 17px;width: 17px; color: rgba(99,102,241)" class="flex-shrink-0 w-5 h-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Unlimited Group Admin Setting</li>
                             <li style="text-align: left;align-items: center;display: flex;padding: 3px 35px"><svg style="margin-right:35px;height: 17px;width: 17px; color: rgba(99,102,241)" class="flex-shrink-0 w-5 h-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Prioritized email service</li>
                         </ul>
-                        <a href="javascript:void(0)" id="plan-9" class="pc-btn pc-btn-7" onclick="openOrder('plink_1MNCsaBNqRnfJH4PSdygnOwA')">Order Now</a>
+                        <a href="javascript:void(0)" id="plan-9" class="pc-btn pc-btn-7" onclick="redirectToCheckout('plink_1MNCsaBNqRnfJH4PSdygnOwA')">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                             <li style="text-align: left;align-items: center;display: flex;padding: 3px 35px"><svg style="margin-right:35px;height: 17px;width: 17px; color: rgba(99,102,241)" class="flex-shrink-0 w-5 h-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Unlimited Group Admin Setting</li>
                             <li style="text-align: left;align-items: center;display: flex;padding: 3px 35px"><svg style="margin-right:35px;height: 17px;width: 17px; color: rgba(99,102,241)" class="flex-shrink-0 w-5 h-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Prioritized email service</li>
                         </ul>
-                        <a href="javascript:void(0)" id="plan-20" class="pc-btn pc-btn-7" onclick="openOrder('plink_1MNCrsBNqRnfJH4PBxqdWfBJ')">Order Now</a>
+                        <a href="javascript:void(0)" id="plan-20" class="pc-btn pc-btn-7" onclick="redirectToCheckout('plink_1MNCrsBNqRnfJH4PBxqdWfBJ')">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -88,35 +88,9 @@
 <script src="./js/logger-util.js"></script>
 <script>
     let plugin_id = 'nmbjblpeeiobnakglbickhpgbinojbch'
-    async function openOrder(plink_id) {
-        const { userPhoneNum } = await chrome.storage.local.get('userPhoneNum')
-        const metadata = {
-            extension_type: 2,
-            plink_id: plink_id,
-            whatsapp_number: userPhoneNum
-        }
-        let requestObj = {
-            payment_method: 'card',
-            currency: 'usd',
-            metadata: metadata
-        }
-        let httpRequest = new XMLHttpRequest()//第一步：创建需要的对象
-        const PAY_URL = 'https://sender.watechdev.asia'
-        // const PAY_URL = 'https://lab.zingfront.com'
-        httpRequest.open('POST', PAY_URL + '/api/pay/make-order', true) //第二步：打开连接
-        httpRequest.setRequestHeader("Content-type","application/json")//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）"accept, accept-encoding, authorization, content-type, dnt, origin, user-agent, x-csrftoken, x-requested-with, language, whatsapp-id, version")
-        httpRequest.send(JSON.stringify(requestObj));//发送请求 将情头体写在send中
-        /**
-         * 获取数据后的处理程序
-         */
-        httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
-            if (httpRequest.readyState == 4 && httpRequest.status == 200) {//验证请求是否发送成功
-                let responseText = httpRequest.responseText;//获取到服务端返回的数据
-                let response_json = JSON.parse(responseText)
-                window.location.href = response_json['data']['url']
-            }
-        };
-    }
+    function redirectToCheckout(plan) {
+    window.open('https://wazapsenderextension.vercel.app/', "_blank");
+}
 
     function freeUseNow() {
         window.close()
