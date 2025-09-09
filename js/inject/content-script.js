@@ -116,10 +116,9 @@ function tryExtractPhoneWithRetry() {
                 console.log("Falha ao obter número após todas as tentativas");
             }
         }
-    }, 2000); // Tenta a cada 2 segundos
+    }, 2000);
 }
 
-// Executar no window.onload
 window.onload = function() {
     tryExtractPhoneWithRetry();
     let e = Xe();
@@ -129,7 +128,7 @@ window.onload = function() {
         language: window.navigator.language,
         phoneNum: e
     };
-    chrome.storage.local.set({ ...t }).then(e => {});
+    chrome.storage.local.set({ ...t }).then(() => {});
     chrome.storage.local.remove(["isShowNoSubscription", "isOneNoSubscription", "isShowNoActive", "actionCodeList"]);
     et(e, t);
 };
